@@ -8,7 +8,7 @@
 
 <ion-content>
   <ion-item>
-    <ion-label>Select Country</ion-label>
+    <ion-label><strong>Select Country</strong></ion-label>
     <ion-select [(ngModel)]="selectedCountry" (ionChange)="onCountryChange()">
       <ion-select-option value="">All</ion-select-option>
       <ion-select-option *ngFor="let country of countries" [value]="country.name">{{ country.name_en }}
@@ -16,10 +16,19 @@
     </ion-select>
   </ion-item>
 
-  <ion-list>
+  <!-- <ion-list>
     <ion-item *ngFor="let league of leagues">
       <ion-avatar slot="start">
         <img src="{{ league.strBadge }}" alt="{{ league.strLeague }}">
+      </ion-avatar>
+      <ion-label>{{ league.strLeague }}</ion-label>
+    </ion-item>
+  </ion-list> -->
+
+  <ion-list *ngIf="leagues" class="ion-margin-top">
+    <ion-item *ngFor="let league of leagues" (click)="onLeagueClick(league.strLeague)">
+      <ion-avatar slot="start" *ngIf="league.strBadge">
+        <img src="{{ league.strBadge }}" alt="{{ league.strLeague }}" loading="lazy">
       </ion-avatar>
       <ion-label>{{ league.strLeague }}</ion-label>
     </ion-item>

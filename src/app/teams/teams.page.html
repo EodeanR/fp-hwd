@@ -1,0 +1,94 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button text="Back" icon="caret-back"></ion-back-button>
+    </ion-buttons>
+    <ion-title>
+      {{ leagueName }}
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+
+
+  <ion-grid>
+    <ion-row *ngIf="teams">
+      <ion-col size="6" *ngFor="let team of teams" (click)="setOpen(true, team.idTeam, team.strLeague)">
+        <ion-card class="team ion-padding-top ion-text-center ion-no-margin">
+          <img alt="{{ team.strTeam }}" src="{{team.strTeamBadge}}" width="50%" loading="lazy" />
+          <ion-card-header class="ion-text-start">
+            <h3>{{ team.strTeam }}</h3>
+            <small>{{ team.strLeague }}</small>
+          </ion-card-header>
+        </ion-card>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-modal [isOpen]="isModalOpen">
+    <ng-template>
+      <ion-header>
+        <ion-toolbar>
+          <ion-button (click)="favorite(detailTeam)">
+            <ion-icon name="star-outline"></ion-icon>
+          </ion-button>
+          <ion-buttons slot="end">
+            <ion-button (click)="setOpen(false,null,null)">Close</ion-button>
+          </ion-buttons>
+        </ion-toolbar>
+      </ion-header>
+      <ion-content class="ion-padding">
+        <ion-card class="ion-padding-top ion-no-margin">
+          <div class="img ion-text-center">
+            <img alt="{{ detailTeam.strTeam }}" src="{{ detailTeam.strTeamBadge }}" width="50%" />
+          </div>
+          <ion-card-header>
+            <ion-card-title>{{ detailTeam.strTeam }}</ion-card-title>
+            <ion-card-subtitle>{{ detailTeam.strAlternate }}</ion-card-subtitle>
+          </ion-card-header>
+          <ion-card-content>
+            <ion-grid>
+              <ion-row>
+                <ion-col class="ion-text-center">
+                  <ion-text>
+                    <strong>Established</strong>
+                    <p>{{ detailTeam.intFormedYear }}</p>
+                  </ion-text>
+                </ion-col>
+                <ion-col class="ion-text-center">
+                  <ion-text>
+                    <strong>Country</strong>
+                    <p>{{ detailTeam.strCountry }}</p>
+                  </ion-text>
+                </ion-col>
+              </ion-row>
+            </ion-grid>
+            <ion-text>
+              <h2><strong>Description</strong></h2>
+              <p>{{ detailTeam.strDescriptionEN }}</p>
+            </ion-text>
+
+            <div class="stadium ion-margin-vertical ion-text-center">
+              <h2><strong>{{ detailTeam.strStadium }}</strong></h2>
+              <img src="{{ detailTeam.strStadiumThumb }}" alt="{{ detailTeam.strStadium }}"><br>
+              <small>{{ detailTeam.strStadiumLocation }}</small>
+            </div>
+            <div class="jersey ion-margin-vertical ion-text-center">
+              <h2><strong>Jersey</strong></h2>
+              <img src="{{ detailTeam.strTeamJersey }}" alt="{{ detailTeam.strTeam }}'s jersey">
+            </div>
+            <div class="socmed ion-margin-vertical">
+              <h2><strong>Social Media</strong></h2>
+              <p>Website: <a target="_blank" href="{{ detailTeam.strWebsite }}">{{ detailTeam.strWebsite }}</a></p>
+              <p>Twitter: <a target="_blank" href="{{ detailTeam.strTwitter }}">{{ detailTeam.strTwitter }}</a></p>
+              <p>Youtube: <a target="_blank" href="{{ detailTeam.strYoutube }}">{{ detailTeam.strYoutube }}</a></p>
+            </div>
+
+          </ion-card-content>
+        </ion-card>
+      </ion-content>
+    </ng-template>
+  </ion-modal>
+
+</ion-content>

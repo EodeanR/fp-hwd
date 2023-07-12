@@ -1,0 +1,14 @@
+ion-card{
+    min-height: 100%;
+}
+ion-card.team{
+    cursor: pointer;
+    transition: 0.2s;
+    -webkit-transition: 0.2s;
+    -moz-transition: 0.2s;
+    -ms-transition: 0.2s;
+    -o-transition: 0.2s;
+}
+ion-card.team:hover{
+    background-color: #373564;
+}
